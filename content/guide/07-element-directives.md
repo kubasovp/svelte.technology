@@ -1,12 +1,12 @@
 ---
-title: Directives
+title: Директивы
 ---
 
-Directives are element or component-level instructions to Svelte. They look like attributes, except with a `:` character.
+Директивы это инструкции для элемента или компонента. Они выглядят как атрибуты с символом `:`.
 
-### Event handlers
+### Обработчики событий (Event handlers)
 
-In most applications, you'll need to respond to the user's actions. In Svelte, this is done with the `on:[event]` directive.
+В большинстве приложений вам нужно ответить на действия пользователя. В Svelte это делается с помощью директивы `on:[event]`.
 
 ```html
 <!-- { title: 'Event handlers' } -->
@@ -21,7 +21,7 @@ In most applications, you'll need to respond to the user's actions. In Svelte, t
 }
 ```
 
-When the user clicks the button, Svelte calls `component.set(...)` with the provided arguments. You can call any method belonging to the component (whether [built-in](guide#component-api) or [custom](guide#custom-methods)), and any data property (or computed property) that's in scope:
+Когда пользователь кликает по кнопке, Svelte вызывает `component.set (...)` с заданными аргументами. Вы можете вызывать любой метод, принадлежащий этому компоненту (неважно, [встроенный](guide#component-api) или [кастомный](guide#custom-methods)) и любое свойство (или вычисленное свойство), которое находится в области видимости:
 
 ```html
 <!-- { title: 'Calling custom methods' } -->
