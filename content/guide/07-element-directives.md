@@ -426,7 +426,6 @@ export default function createRenderer(canvas, ctx) {
 
 ### Действия (Actions)
 
-Actions let you decorate elements with additional functionality. Actions are functions which may return an object with lifecycle methods, `update` and `destroy`. The action will be called when its element is added to the DOM.
 Действия позволяют вам оснащать элементы с дополнительной функциональностью. Действия — это функции, которые могут возвращать объект с помощью методов жизненного цикла: `update` и `destroy`. Действие вызывается когда его элемент добавляется в DOM.
 
 Используйте действия для таких вещей, как:
