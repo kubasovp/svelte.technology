@@ -21,7 +21,7 @@ title: Директивы
 }
 ```
 
-Когда пользователь кликает по кнопке, Svelte вызывает `component.set (...)` с заданными аргументами. Вы можете вызывать любой метод, принадлежащий этому компоненту (неважно, [встроенный](guide#component-api) или [кастомный](guide#custom-methods)) и любое свойство (или вычисленное свойство), которое находится в области видимости:
+Когда пользователь кликает по кнопке, Svelte вызывает `component.set (...)` с заданными аргументами. Вы можете вызывать любой метод, принадлежащий этому компоненту (неважно, [встроенный](guide#component-api) или [пользовательский](guide#custom-methods)) и любое свойство (или вычисленное свойство), которое находится в области видимости:
 
 ```html
 <!-- { title: 'Calling custom methods' } -->
@@ -45,14 +45,14 @@ title: Директивы
 
 		methods: {
 			select(name) {
-				alert(`selected ${name}`); // seriously, please don't do this
+				alert(`selected ${name}`); // серьезно, пожалуйста, не делайте этого
 			}
 		}
 	};
 </script>
 ```
 
-You can also access the `event` object in the method call:
+Также, можно получить доступ к объекту события (`event`) при вызове метода:
 
 ```html
 <!-- { title: 'Accessing `event`' } -->
@@ -69,20 +69,20 @@ You can also access the `event` object in the method call:
 </style>
 ```
 
-The target node can be referenced as `this`, meaning you can do this sort of thing:
+На нужный узел можно ссылаться с помощью `this`, то есть вы можете делать так:
 
 ```html
 <!-- { title: 'Calling node methods' } -->
 <input on:focus="this.select()" value="click to select">
 ```
 
-### Custom events
+### Пользовательские события (Custom events)
 
-You can define your own custom events to handle complex user interactions like dragging and swiping. See the earlier section on [custom event handlers](guide#custom-event-handlers) for more information.
+Вы можете определить свои собственные события для обработки сложных пользовательских взаимодействий, таких как перетаскивание, пролистывание (свайп). Более подробную информацию см. в разделе [обработчики пользовательских событий](guide#custom-event-handlers).
 
-### Component events
+### События в компонентах (Component events)
 
-Events are an excellent way for [nested components](guide#nested-components) to communicate with their parents. Let's revisit our earlier example, but turn it into a `<CategoryChooser>` component:
+События — отличный способ для [вложенных компонентов](guide#nested-components) общаться со своими родителями. Давайте перейдем к нашему предыдущему примеру, но превратим его в компонент `<CategoryChooser>`:
 
 ```html
 <!-- { repl: false } -->
@@ -107,7 +107,7 @@ Events are an excellent way for [nested components](guide#nested-components) to 
 </script>
 ```
 
-When the user clicks a button, the component will fire a `select` event, where the `event` object has a `category` property. Any component that nests `<CategoryChooser>` can listen for events like so:
+Когда пользователь нажимает кнопку, компонент запускает событие `select`, где объект `event` имеет свойство `category`. Любой компонент, который вложен в `<CategoryChooser>`, может прослушивать такие события:
 
 ```html
 <!--{ title: 'Component events' }-->
@@ -153,9 +153,10 @@ When the user clicks a button, the component will fire a `select` event, where t
 </script>
 ```
 
-Just as `this` in an element's event handler refers to the element itself, in a component event handler `this` refers to the component firing the event.
+Так же, как `this` в обработчике событий элемента ссылается на сам элемент, так в обработчике события компонента `this` относится к компоненту, запускающему событие.
 
 There is also a shorthand for listening for and re-firing an event unchanged.
+Есть также краткая запись для прослушивания и повторного запуска события без изменений.
 
 ```html
 <!-- { repl: false } -->
@@ -164,7 +165,7 @@ There is also a shorthand for listening for and re-firing an event unchanged.
 <Widget on:foo/>
 ```
 
-Since component events do not propagate as DOM events do, this can be used to pass events through intermediate components. This shorthand technique also applies to element events (`on:click` is equivalent to `on:click="fire('click', event)"`).
+Поскольку события компонента не распространяются как события DOM, это можно использовать для передачи событий через промежуточные компоненты. Эта сокращенная техника также применяется к событиям элемента (`on:click` эквивалентно: `on:click="fire('click', event)"`).
 
 ### Refs
 
