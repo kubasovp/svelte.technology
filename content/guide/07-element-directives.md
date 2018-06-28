@@ -431,8 +431,8 @@ export default function createRenderer(canvas, ctx) {
 Используйте действия для таких вещей, как:
 * подсказки
 * «ленивой» подгрузки картинок при скролле, например `<img use:lazyload data-src='giant-photo.jpg'/>`
-* захвата ссылок для роутера
-* добавление перетаскивания (drag and drop)
+* захвата ссылок для роутера (capturing link clicks for your client router)
+* перетаскивание (drag and drop)
 
 ```html
 <!-- { title: 'Actions' } -->
