@@ -4,6 +4,7 @@ title: Директивы
 
 Директивы это инструкции для элемента или компонента. Они выглядят как атрибуты с символом `:`.
 
+
 ### Обработчики событий (Event handlers)
 
 В большинстве приложений вам нужно ответить на действия пользователя. В Svelte это делается с помощью директивы `on:[event]`.
@@ -76,9 +77,11 @@ title: Директивы
 <input on:focus="this.select()" value="click to select">
 ```
 
+
 ### Пользовательские события (Custom events)
 
 Вы можете определить свои собственные события для обработки сложных пользовательских взаимодействий, таких как перетаскивание, пролистывание (свайп). Более подробную информацию см. в разделе [обработчики пользовательских событий](guide#custom-event-handlers).
+
 
 ### События в компонентах (Component events)
 
@@ -107,7 +110,7 @@ title: Директивы
 </script>
 ```
 
-Когда пользователь нажимает кнопку, компонент запускает событие `select`, где объект `event` имеет свойство `category`. Любой компонент, который вложен в `<CategoryChooser>`, может прослушивать такие события:
+Когда пользователь нажимает кнопку, компонент запускает событие `select`, где у объекта `event` есть свойство `category`. Любой компонент, который вложен в `<CategoryChooser>`, может прослушивать такие события:
 
 ```html
 <!--{ title: 'Component events' }-->
@@ -156,7 +159,7 @@ title: Директивы
 Так же, как `this` в обработчике событий элемента ссылается на сам элемент, так в обработчике события компонента `this` относится к компоненту, запускающему событие.
 
 There is also a shorthand for listening for and re-firing an event unchanged.
-Есть также краткая запись для прослушивания и повторного запуска события без изменений.
+<!-- Есть краткая запись для прослушивания и повторного запуска события без изменений. -->
 
 ```html
 <!-- { repl: false } -->
@@ -167,9 +170,10 @@ There is also a shorthand for listening for and re-firing an event unchanged.
 
 Поскольку события компонента не распространяются как события DOM, это можно использовать для передачи событий через промежуточные компоненты. Эта сокращенная техника также применяется к событиям элемента (`on:click` эквивалентно: `on:click="fire('click', event)"`).
 
-### Refs
 
-Refs are a convenient way to store a reference to particular DOM nodes or components. Declare a ref with `ref:[name]`, and access it inside your component's methods with `this.refs.[name]`:
+### Ссылки на узлы или компоненты (Refs)
+
+Refs — удобный способ хранения ссылок на определенные DOM-узлы или компоненты. Объявите ref с помощью `ref:[name]` и получите доступ к нему внутри методов вашего компонента с помощью `this.refs.[name]`:
 
 ```html
 <!-- { title: 'Refs' } -->
@@ -230,14 +234,14 @@ export default function createRenderer(canvas, ctx) {
 }
 ```
 
-> Since only one element or component can occupy a given `ref`, don't use them in `{#each ...}` blocks. It's fine to use them in `{#if ...}` blocks however.
+> Поскольку только один элемент или компонент может занимать заданный `ref`, не используйте их в блоках `{#each ...}`. Однако, их можно использовать в блоках `{#if ...}`.
 
-Note that you can use refs in your `<style>` blocks — see [Special selectors](guide#special-selectors).
+Обратите внимание, что вы можете использовать refs в блоках `<style>` — см. [Специальные селекторы](guide#special-selectors).
 
 
-### Transitions
+### Переходы (Transitions)
 
-Transitions allow elements to enter and leave the DOM gracefully, rather than suddenly appearing and disappearing.
+Переходы позволяют элементам плавно появляться и исчезать.
 
 ```html
 <!-- { title: 'Transitions' } -->
@@ -256,7 +260,7 @@ Transitions allow elements to enter and leave the DOM gracefully, rather than su
 </script>
 ```
 
-Transitions can have parameters — typically `delay` and `duration`, but often others, depending on the transition in question. For example, here's the `fly` transition from the [svelte-transitions](https://github.com/sveltejs/svelte-transitions) package:
+Переходы могут иметь параметры — обычно это `delay`, `duration` и другие, в зависимости от рассматриваемого перехода. Например, вот переход `fly` из пакета [svelte-transitions](https://github.com/sveltejs/svelte-transitions):
 
 ```html
 <!-- { title: 'Transition with parameters' } -->
@@ -275,7 +279,7 @@ Transitions can have parameters — typically `delay` and `duration`, but often 
 </script>
 ```
 
-An element can have separate `in` and `out` transitions:
+Элемент может иметь отдельные переходы `in` и `out`:
 
 ```html
 <!-- { title: 'Transition in/out' } -->
@@ -294,15 +298,15 @@ An element can have separate `in` and `out` transitions:
 </script>
 ```
 
-Transitions are simple functions that take a `node` and any provided `parameters` and return an object with the following properties:
+Переходы — это простые функции, которые берут «узел» и любые предоставленные параметры и возвращают объект со следующими свойствами:
 
-* `duration` — how long the transition takes in milliseconds
-* `delay` — milliseconds before the transition starts
+* `duration` — время перехода в миллисекундах
+* `delay` — задержка перед началом в миллисекундах
 * `easing` — an [easing function](https://github.com/rollup/eases-jsnext)
-* `css` — a function that accepts an argument `t` between 0 and 1 and returns the styles that should be applied at that moment
-* `tick` — a function that will be called on every frame, with the same `t` argument, while the transition is in progress
+* `css` — функция, которая принимает аргумент `t` равный числу между 0 и 1 и возвращает стили, которые должны применяться в этот момент
+* `tick` — функция, которая будет вызываться в каждом кадре, с тем же аргументом `t`, пока выполняется переход
 
-Of these, `duration` is required, as is *either* `css` or `tick`. The rest are optional. Here's how the `fade` transition is implemented, for example:
+Их них обязательный — `duration`, а так же либо `css`, либо `tick`. Остальные — необязательные. Вот как реализуется переход `fade`:
 
 ```html
 <!-- { title: 'Fade transition' } -->
@@ -329,38 +333,37 @@ Of these, `duration` is required, as is *either* `css` or `tick`. The rest are o
 </script>
 ```
 
-> If the `css` option is used, Svelte will create a CSS animation that runs efficiently off the main thread. Therefore if you can achieve an effect using `css` rather than `tick`, you should.
+> Если используется параметр `css`, Svelte создаст CSS-анимацию, которая эффективно работает с основным потоком. Поэтому, если вы можете добиться результата, используя `css`, а не `tick` — сделайте это.
 
 
-### Bindings
+### Привязки (Bindings)
 
-As we've seen, data can be passed down to elements and components with attributes and [props](guide#props). Occasionally, you need to get data back up; for that we use bindings.
+Как мы видели, данные могут быть переданы элементам и компонентам с атрибутами и [свойствами](guide#props). Иногда вам нужно вернуть данные — для этого мы используем привязки.
 
 
-#### Component bindings
+#### Связывание компонентов (Component bindings)
 
-Component bindings keep values in sync between a parent and a child:
+Связи компонентов сохраняют значения при синхронизации между родителем и дочерним элементом:
 
 ```html
 <!-- { repl: false } -->
 <Widget bind:childValue=parentValue/>
 ```
 
-Whenever `childValue` changes in the child component, `parentValue` will be updated in the parent component and vice versa.
+Всякий раз, когда `childValue` изменяется в дочернем компоненте, `parentValue` будет обновляться в родительском компоненте и наоборот.
 
-If the names are the same, you can shorten the declaration:
+Если имена совпадают, вы можете использовать краткую запись:
 
 ```html
 <!-- { repl: false } -->
 <Widget bind:value/>
 ```
 
-> Use component bindings judiciously. They can save you a lot of boilerplate, but will make it harder to reason about data flow within your application if you overuse them.
+> Используйте связывание компонентов разумно. They can save you a lot of boilerplate, но вам будет сложнее следить за потоком данных в вашем приложении, если их будет слишком много.
 
+#### Связывание элементов (Element bindings)
 
-#### Element bindings
-
-Element bindings make it easy to respond to user interactions:
+Связывание элементов позволяет легко реагировать на взаимодействия пользователей:
 
 ```html
 <!-- { title: 'Element bindings' } -->
@@ -375,22 +378,22 @@ Element bindings make it easy to respond to user interactions:
 }
 ```
 
-Some bindings are *one-way*, meaning that the values are read-only. Most are *two-way* — changing the data programmatically will update the DOM. The following bindings are available:
+Некоторые привязки *односторонние*, что означает, что значения доступны только для чтения. Большинство из них *двусторонние* — изменение данных будет обновлять DOM. Доступны следующие привязки:
 
-| Name                                                            | Applies to                                   | Kind                 |
-|-----------------------------------------------------------------|----------------------------------------------|----------------------|
-| `value`                                                         | `<input>` `<textarea>` `<select>`            | <span>Two-way</span> |
-| `checked`                                                       | `<input type=checkbox>`                      | <span>Two-way</span> |
-| `group` (see note)                                              | `<input type=checkbox>` `<input type=radio>` | <span>Two-way</span> |
-| `currentTime` `paused` `played` `volume`                        | `<audio>` `<video>`                          | <span>Two-way</span> |
-| `buffered` `duration` `seekable`                                | `<audio>` `<video>`                          | <span>One-way</span> |
-| `offsetWidth` `offsetHeight` `clientWidth` `clientHeight`       | All block-level elements                     | <span>One-way</span> |
-| `scrollX` `scrollY`                                             | `<svelte:window>`                            | <span>Two-way</span> |
-| `online` `innerWidth` `innerHeight` `outerWidth` `outerHeight`  | `<svelte:window>`                            | <span>One-way</span> |
+| Имя                                                            | Относится к                                  | Тип                        |
+|----------------------------------------------------------------|----------------------------------------------|----------------------------|
+| `value`                                                        | `<input>` `<textarea>` `<select>`            | <span>двусторонняя</span>  |
+| `checked`                                                      | `<input type=checkbox>`                      | <span>двусторонняя</span>  |
+| `group` (see note)                                             | `<input type=checkbox>` `<input type=radio>` | <span>двусторонняя</span>  |
+| `currentTime` `paused` `played` `volume`                       | `<audio>` `<video>`                          | <span>двусторонняя</span>  |
+| `buffered` `duration` `seekable`                               | `<audio>` `<video>`                          | <span>односторонняя</span> |
+| `offsetWidth` `offsetHeight` `clientWidth` `clientHeight`      | Все блочные элементы                         | <span>односторонняя</span> |
+| `scrollX` `scrollY`                                            | `<svelte:window>`                            | <span>двусторонняя</span>  |
+| `online` `innerWidth` `innerHeight` `outerWidth` `outerHeight` | `<svelte:window>`                            | <span>односторонняя</span> |
 
-> 'group' bindings allow you to capture the current value of a [set of radio inputs](repl?demo=binding-input-radio), or all the selected values of a [set of checkbox inputs](repl?demo=binding-input-checkbox-group).
+> Групповое связывание ('group') позволяет вам фиксировать текущее значение [набора radio-инпутов](repl?demo=binding-input-radio) или всех выбранных значений [checkbox-инпутов](repl?demo=binding-input-checkbox-group).
 
-Here is a complete example of using two way bindings with a form:
+Вот полный пример использования двухсторонних привязок с формой:
 
 ```html
 <!-- { title: 'Form bindings' } -->
@@ -421,15 +424,16 @@ Here is a complete example of using two way bindings with a form:
 }
 ```
 
-### Actions
+### Действия (Actions)
 
 Actions let you decorate elements with additional functionality. Actions are functions which may return an object with lifecycle methods, `update` and `destroy`. The action will be called when its element is added to the DOM.
+Действия позволяют вам оснащать элементы с дополнительной функциональностью. Действия — это функции, которые могут возвращать объект с помощью методов жизненного цикла: `update` и `destroy`. Действие вызывается когда его элемент добавляется в DOM.
 
-Use actions for things like:
-* tooltips
-* lazy loading images as the page is scrolled, e.g. `<img use:lazyload data-src='giant-photo.jpg'/>`
-* capturing link clicks for your client router
-* adding drag and drop
+Используйте действия для таких вещей, как:
+* подсказки
+* «ленивой» подгрузки картинок при скролле, например `<img use:lazyload data-src='giant-photo.jpg'/>`
+* захвата ссылок для роутера
+* добавление перетаскивания (drag and drop)
 
 ```html
 <!-- { title: 'Actions' } -->
