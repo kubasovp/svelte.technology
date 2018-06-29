@@ -1,12 +1,14 @@
 ---
-title: Plugins
+title: Плагины
 ---
 
-Svelte can be extended with plugins and extra methods.
+Возможности Svelte можно расширить с помощью плагинов и дополнительных методов.
+<!-- Svelte can be extended with plugins and extra methods. -->
 
-### Transition plugins
+### Плагины перехода (Transition plugins)
 
-The [svelte-transitions](https://github.com/sveltejs/svelte-transitions) package includes a selection of officially supported transition plugins, such as [fade](https://github.com/sveltejs/svelte-transitions-fade), [fly](https://github.com/sveltejs/svelte-transitions-fly) and [slide](https://github.com/sveltejs/svelte-transitions-slide). You can include them in a component like so:
+Пакет [svelte-transitions](https://github.com/sveltejs/svelte-transitions) включает в себя набор официально поддерживаемых плагинов перехода, таких как [fade](https://github.com/sveltejs/svelte-transitions-fade), [fly](https://github.com/sveltejs/svelte-transitions-fly) и [slide](https://github.com/sveltejs/svelte-transitions-slide). Вы можете включить их в компонент следующим образом:
+<!-- The [svelte-transitions](https://github.com/sveltejs/svelte-transitions) package includes a selection of officially supported transition plugins, such as [fade](https://github.com/sveltejs/svelte-transitions-fade), [fly](https://github.com/sveltejs/svelte-transitions-fly) and [slide](https://github.com/sveltejs/svelte-transitions-slide). You can include them in a component like so: -->
 
 ```html
 <!-- { title: 'svelte-transitions' } -->
@@ -36,9 +38,10 @@ The [svelte-transitions](https://github.com/sveltejs/svelte-transitions) package
 ```
 
 
-### Extra methods
+### Дополнительные методы (Extra methods)
 
-The [svelte-extras](https://github.com/sveltejs/svelte-extras) package includes a handful of methods for tweening (animating), manipulating arrays and so on.
+Пакет [svelte-extras](https://github.com/sveltejs/svelte-extras) включает в себя несколько методов для анимации, работы с массивами и т. д.
+<!-- The [svelte-extras](https://github.com/sveltejs/svelte-extras) package includes a handful of methods for tweening (animating), manipulating arrays and so on. -->
 
 ```html
 <!-- { title: 'svelte-extras' } -->
