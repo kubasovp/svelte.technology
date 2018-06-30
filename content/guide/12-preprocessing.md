@@ -1,15 +1,18 @@
 ---
-title: Preprocessing
+title: Предварительная обработка (Preprocessing)
 ---
 
-Some developers like to use non-standard languages such as [Pug](https://pugjs.org/api/getting-started.html), [Sass](http://sass-lang.com/) or [CoffeeScript](http://coffeescript.org/).
+Некоторые разработчики предпочитают использовать нестандартные языки, такие как [Pug](https://pugjs.org/api/getting-started.html), [Sass](http://sass-lang.com/) или [CoffeeScript](http://coffeescript.org/).
+<!-- Some developers like to use non-standard languages such as [Pug](https://pugjs.org/api/getting-started.html), [Sass](http://sass-lang.com/) or [CoffeeScript](http://coffeescript.org/). -->
 
-It's possible to use these languages, or anything else that can be converted to HTML, CSS and JavaScript, using *preprocessors*.
+Можно использовать эти языки или что-то еще, что можно преобразовать в HTML, CSS и JavaScript, используя *препроцессоры*.
+<!-- It's possible to use these languages, or anything else that can be converted to HTML, CSS and JavaScript, using *preprocessors*. -->
 
 
 ### svelte.preprocess
 
-Svelte exports a `preprocess` function that takes some input source code and returns a Promise for a standard Svelte component, ready to be used with `svelte.compile`:
+Svelte экспортирует функцию `preprocess`, которая берет какой-либо код и возвращает Promise для стандартного компонента Svelte, готового для использования с `svelte.compile`:
+<!-- Svelte exports a `preprocess` function that takes some input source code and returns a Promise for a standard Svelte component, ready to be used with `svelte.compile`: -->
 
 ```js
 const svelte = require('svelte');
@@ -47,15 +50,20 @@ svelte.preprocess(input, {
 });
 ```
 
-The `markup` preprocessor, if specified, runs first. The `content` property represents the entire input string.
+Препроцессор `markup`, если задан, запускается первым. Свойство `content` представляет собой всю входную строку.
+<!-- The `markup` preprocessor, if specified, runs first. The `content` property represents the entire input string. -->
 
-The `style` and `script` preprocessors receive the contents of the `<style>` and `<script>` elements respectively, along with any `attributes` on those elements (e.g. `<style lang='scss'>`).
+Препроцессоры `style` и `script` получают содержимое элементов `<style>` и `<script>` соответственно, а также любые атрибуты этих элементов (например, `<style lang='scss'>`) ,
+<!-- The `style` and `script` preprocessors receive the contents of the `<style>` and `<script>` elements respectively, along with any `attributes` on those elements (e.g. `<style lang='scss'>`). -->
 
-All three preprocessors are optional. Each should return a `{ code, map }` object or a Promise that resolves to a `{ code, map }` object, where `code` is the resulting string and `map` is a sourcemap representing the transformation.
+Все три препроцессора являются необязательными. Каждый должен возвращать объект `{ code, map }` или Promise, который разрешает объект `{ code, map }`, где `code` является результирующей строкой, а `map` является sourcemap, представляющей преобразование.
+<!-- All three preprocessors are optional. Each should return a `{ code, map }` object or a Promise that resolves to a `{ code, map }` object, where `code` is the resulting string and `map` is a sourcemap representing the transformation. -->
 
-> The returned `map` objects are not currently used by Svelte, but will be in future versions
+> Возвращенные объекты `map` в настоящее время не используются в Svelte, но будут использоваться в будущих версиях
+<!-- The returned `map` objects are not currently used by Svelte, but will be in future versions -->
 
 
-### Using build tools
+### Использование инструментов сборки (Using build tools)
 
-Many build tool plugins, such as [rollup-plugin-svelte](https://github.com/rollup/rollup-plugin-svelte) and [svelte-loader](https://github.com/sveltejs/svelte-loader), allow you to specify `preprocess` options, in which case the build tool will do the grunt work.
+Многие плагины для инструментов сборки, например, такие как [rollup-plugin-svelte](https://github.com/rollup/rollup-plugin-svelte) и [svelte-loader](https://github.com/sveltejs/svelte-loader), позволяют указать специфичесие опции для `preprocess`, и в этом случае инструмент сборки сделает черновую работу.
+<!-- Many build tool plugins, such as [rollup-plugin-svelte](https://github.com/rollup/rollup-plugin-svelte) and [svelte-loader](https://github.com/sveltejs/svelte-loader), allow you to specify `preprocess` options, in which case the build tool will do the grunt work. -->

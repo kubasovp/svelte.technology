@@ -1,15 +1,20 @@
 ---
-title: Custom elements
+title: Пользовательские элементы (Custom elements)
 ---
 
-[Custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements) are an emerging web standard for creating DOM elements that encapsulate styles and behaviours, much like Svelte components. They are part of the [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) family of specifications.
+[Пользовательские элементы](https://developer.mozilla.org/ru/docs/Web/Web_Components/Использование_пользовательских_элементов) — это стандарт создания элементов DOM, которые инкапсулируют стили и поведение, подобно компонентам Svelte. Они являются частью семейства спецификаций [веб-компоненты](https://developer.mozilla.org/ru/docs/Web/Web_Components).
+<!-- [Custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements) are an emerging web standard for creating DOM elements that encapsulate styles and behaviours, much like Svelte components. They are part of the [web components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) family of specifications. -->
 
-> Most browsers need [polyfills](https://www.webcomponents.org/polyfills) for custom elements. See [caniuse](https://caniuse.com/#feat=custom-elementsv1) for more details
+> Большинство браузеров нуждаются в [polyfills](https://www.webcomponents.org/polyfills) для пользовательских элементов. См. [caniuse](https://caniuse.com/#feat=custom-elementsv1) для получения более подробной информации
+<!-- Most browsers need [polyfills](https://www.webcomponents.org/polyfills) for custom elements. See [caniuse](https://caniuse.com/#feat=custom-elementsv1) for more details -->
 
-Svelte components can be used as custom elements by doing the following:
+Компоненты Svelte могут использоваться как пользовательские элементы, выполняя следующие действия:
+<!-- Svelte components can be used as custom elements by doing the following: -->
 
-1. Declaring a `tag` name. The value must contain a hyphen (`hello-world` in the example below)
-2. Specifying `customElement: true` in the compiler configuration
+1. Объявление имени `тега`. Значение должно содержать дефис (`hello-world` в приведенном ниже примере)
+2. Указание `customElement: true` в конфигурации компилятора
+<!-- 1. Declaring a `tag` name. The value must contain a hyphen (`hello-world` in the example below)
+2. Specifying `customElement: true` in the compiler configuration -->
 
 ```html
 <!-- { filename: 'HelloWorld.html', repl: false } -->
@@ -22,7 +27,8 @@ Svelte components can be used as custom elements by doing the following:
 </script>
 ```
 
-Importing this file will now register a globally-available `<hello-world>` custom element that accepts a `name` property:
+При импорте этого файла будет зарегистрирован глобальный пользовательский элемент `<hello-world>`, который принимает свойство `name`:
+<!-- Importing this file will now register a globally-available `<hello-world>` custom element that accepts a `name` property: -->
 
 ```js
 import './HelloWorld.html';
@@ -32,16 +38,19 @@ const el = document.querySelector('hello-world');
 el.name = 'everybody';
 ```
 
-See [svelte-custom-elements.surge.sh](http://svelte-custom-elements.surge.sh/) ([source here](https://github.com/sveltejs/template-custom-element)) for a larger example.
+См. [svelte-custom-elements.surge.sh](http://svelte-custom-elements.surge.sh/) ([источник](https://github.com/sveltejs/template-custom-element)) для более подробного примера.
+<!-- See [svelte-custom-elements.surge.sh](http://svelte-custom-elements.surge.sh/) ([source here](https://github.com/sveltejs/template-custom-element)) for a larger example. -->
 
-The compiled custom elements are still full-fledged Svelte components and can be used as such:
+Скомпилированные пользовательские элементы так же являются полнофункциональными компонентами Svelte и могут использоваться как таковые:
+<!-- The compiled custom elements are still full-fledged Svelte components and can be used as such: -->
 
 ```js
 el.get().name === el.name; // true
 el.set({ name: 'folks' }); // equivalent to el.name = 'folks'
 ```
 
-One crucial difference is that styles are *fully encapsulated* — whereas Svelte will prevent component styles from leaking *out*, custom elements use [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM) which also prevents styles from leaking *in*.
+Одно существенное различие заключается в том, что стили *полностью инкапсулированы* — в то время как Svelte предотвращает утечку стилей компонентов из *out*, пользовательские элементы используют [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM), который также предотвращает утечку стилей из *in*.
+<!-- One crucial difference is that styles are *fully encapsulated* — whereas Svelte will prevent component styles from leaking *out*, custom elements use [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM) which also prevents styles from leaking *in*. -->
 
 ### Using `<slot>`
 
