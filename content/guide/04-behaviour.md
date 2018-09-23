@@ -1,8 +1,9 @@
 ---
-title: Behaviours
+title: Поведение (Behaviours)
 ---
 
-As well as scoped styles and a template, components can encapsulate *behaviours*. For that, we add a `<script>` element and export an object:
+Как и стили, и шаблон, компоненты могут содержать поведение (логику). Для этого мы добавляем элемент `<script>` и экспортируем объект:
+<!-- As well as scoped styles and a template, components can encapsulate *behaviours*. For that, we add a `<script>` element and export an object: -->
 
 ```html
 <!-- { title: 'Behaviours' } -->
@@ -18,9 +19,10 @@ As well as scoped styles and a template, components can encapsulate *behaviours*
 ```
 
 
-### Default data
+### Данные по умолчанию (Default data)
 
-Often, it makes sense for a component to have default data. This should be expressed as a function that returns a plain JavaScript object:
+Часто компонент должен иметь данные по умолчанию. Это должно быть выражено функцией, которая возвращает простой объект JavaScript:
+<!-- Often, it makes sense for a component to have default data. This should be expressed as a function that returns a plain JavaScript object: -->
 
 ```html
 <!-- { title: 'Default data' } -->
@@ -38,7 +40,8 @@ Often, it makes sense for a component to have default data. This should be expre
 </script>
 ```
 
-Data supplied at instantiation takes priority over defaults. In other words, if we instantiated the component above like so...
+Данные, указанные при создании экземпляра, имеют приоритет перед данными по умолчанию. Другими словами, если мы создали экземпляр выше, так...
+<!-- Data supplied at instantiation takes priority over defaults. In other words, if we instantiated the component above like so... -->
 
 ```js
 const counter = new Counter({
@@ -48,14 +51,17 @@ const counter = new Counter({
 });
 ```
 
-...then `{count}`, or `counter.get().count`, would initially be 99 rather than 0.
+...тогда `{count}` или `counter.get().count`, изначально будет 99, а не 0.
+<!-- ...then `{count}`, or `counter.get().count`, would initially be 99 rather than 0. -->
 
 
-### Computed properties
+### Вычисляемые свойства (Computed properties)
 
-Often, your program will use values that depend on other values – for example, you might have a filtered list, which depends on both the list *and* the filter. Normally in JavaScript you'd have to add logic to update the dependent property when *any* of the dependencies change. This is a frequent source of bugs, and it gets worse as your application grows.
+Часто ваша программа будет использовать значения, которые зависят от других значений - например, у вас может быть отфильтрованный список, который зависит как от списка, так и от фильтра. Обычно в JavaScript вам нужно добавить логику, чтобы обновить зависимое свойство, когда какие-то зависимости измененились. Это частый источник ошибок, и ситуация ухудшается по мере роста вашего приложения.
+<!-- Often, your program will use values that depend on other values – for example, you might have a filtered list, which depends on both the list *and* the filter. Normally in JavaScript you'd have to add logic to update the dependent property when *any* of the dependencies change. This is a frequent source of bugs, and it gets worse as your application grows. -->
 
-Svelte allows you to express these dependencies in computed properties, which are recalculated whenever those dependencies change:
+Svelte позволяет вам выражать такие зависимости в вычисляемых свойствах, которые пересчитываются при изменении этих зависимостей:
+<!-- Svelte allows you to express these dependencies in computed properties, which are recalculated whenever those dependencies change: -->
 
 ```html
 <!-- { title: 'Computed properties' } -->
@@ -81,9 +87,11 @@ Svelte allows you to express these dependencies in computed properties, which ar
 </script>
 ```
 
-Each function is passed the component's current state object. Because we're using destructuring syntax, the compiler knows that `hours`, `minutes` and `seconds` only need to re-run when `time` changes, and not when any other values change. There's no costly dependency tracking involved – the dependency graph is resolved at compile time.
+Каждой функции передается текущее состояние объекта компонента. Поскольку мы используем синтаксис деструктурирования, компилятор знает, что «часы», «минуты» и «секунды» нужно повторно запускать, когда изменяется время, а не когда меняются другие значения. Нет никакого дорогостоящего отслеживания зависимостей - граф зависимостей разрешен во время компиляции.
+<!-- Each function is passed the component's current state object. Because we're using destructuring syntax, the compiler knows that `hours`, `minutes` and `seconds` only need to re-run when `time` changes, and not when any other values change. There's no costly dependency tracking involved – the dependency graph is resolved at compile time. -->
 
-> `computed` must be an object literal, and the properties must be function expressions or arrow function expressions. Any external functions used in computed must be wrapped _here_:
+> `computed` должен быть объектным литералом, а свойства должны быть функциональными выражениями или выражениями стрелочных функций. Любые внешние функции, используемые при вычислении, должны быть обернуты _здесь_:
+<!-- `computed` must be an object literal, and the properties must be function expressions or arrow function expressions. Any external functions used in computed must be wrapped _here_: -->
 
 ```js
 import externalFunc from '_external_file';
@@ -94,7 +102,8 @@ export default {
 }
 ```
 
-Computed properties can of course return functions. For example, we could dynamically generate a filter function for a list of items:
+Вычислимые свойства могут, конечно, возвращать функции. Например, мы могли бы динамически генерировать функцию фильтра для списка элементов:
+<!-- Computed properties can of course return functions. For example, we could dynamically generate a filter function for a list of items: -->
 
 ```html
 <!-- { title: 'Filtering' } -->
@@ -628,9 +637,10 @@ Computed properties can of course return functions. For example, we could dynami
 ```
 
 
-### Lifecycle hooks
+### Перехватчики жизненного цикла (Lifecycle hooks)
 
-There are four 'hooks' provided by Svelte for adding control logic — `oncreate`, `ondestroy`, `onstate` and `onupdate`:
+Есть четыре 'хука', предоставляемые Svelte для добавления логики управления - `oncreate`, `ondestroy`, `onstate` и `onupdate`:
+<!-- There are four 'hooks' provided by Svelte for adding control logic — `oncreate`, `ondestroy`, `onstate` and `onupdate`: -->
 
 ```html
 <!-- { title: 'Lifecycle hooks' } -->
@@ -688,12 +698,14 @@ There are four 'hooks' provided by Svelte for adding control logic — `oncreate
 </script>
 ```
 
-> You can add event listeners corresponding to `onstate`, `onupdate` and `ondestroy` programmatically — see [component.on](guide#component-on-eventname-callback-)
+> Вы можете добавлять прослушиватели событий, соответствующие `onstate`, `onupdate` и `ondestroy` программно - см. [component.on](guide#component-on-eventname-callback-)
+<!-- You can add event listeners corresponding to `onstate`, `onupdate` and `ondestroy` programmatically — see [component.on](guide#component-on-eventname-callback-) -->
 
 
-### Helpers
+### Помошники (Helpers)
 
-Helpers are simple functions that are used in your template. In the example above, we want to ensure that `minutes` and `seconds` are preceded with a `0` if they only have one digit, so we add a `leftPad` helper:
+Помощники - это простые функции, которые используются в вашем шаблоне. В приведенном выше примере мы хотим убедиться, что перед `minutes` и `seconds` есть `0`, если они имеют только одну цифру, поэтому мы добавляем помощник `leftPad`:
+<!-- Helpers are simple functions that are used in your template. In the example above, we want to ensure that `minutes` and `seconds` are preceded with a `0` if they only have one digit, so we add a `leftPad` helper: -->
 
 ```html
 <!-- { title: 'Helpers' } -->
@@ -735,14 +747,17 @@ Helpers are simple functions that are used in your template. In the example abov
 </script>
 ```
 
-Of course, you could use `leftPad` inside the computed properties instead of in the template. There's no hard and fast rule about when you should use expressions with helpers versus when you should use computed properties – do whatever makes your component easier for the next developer to understand.
+Конечно, вы можете использовать `leftPad` внутри вычисляемых свойств, а не в шаблоне. Там нет жесткого правила о том, когда вы должны использовать выражения с помощниками и когда вы должны использовать вычисляемые свойства - сделайте то, что облегчит ваш компонент для понимания.
+<!-- Of course, you could use `leftPad` inside the computed properties instead of in the template. There's no hard and fast rule about when you should use expressions with helpers versus when you should use computed properties – do whatever makes your component easier for the next developer to understand. -->
 
-> Helper functions should be *pure* – in other words, they should not have side-effects, and their returned value should only depend on their arguments.
+> Вспомогательные функции должны быть *чистыми*, другими словами, они не должны иметь побочных эффектов, и их возвращаемое значение должно зависеть только от их аргументов.
+<!-- Helper functions should be *pure* – in other words, they should not have side-effects, and their returned value should only depend on their arguments. -->
 
 
-### Custom methods
+### Пользовательские методы (Custom methods)
 
-In addition to the [built-in methods](guide#component-api), you can add methods of your own:
+В дополнение к [встроенным методам](guide#component-api) вы можете добавлять собственные методы:
+<!-- In addition to the [built-in methods](guide#component-api), you can add methods of your own: -->
 
 ```html
 <!-- { title: 'Custom methods' } -->
@@ -759,7 +774,8 @@ In addition to the [built-in methods](guide#component-api), you can add methods 
 </script>
 ```
 
-These become part of the component's API:
+Они становятся частью API компонента:
+<!-- These become part of the component's API: -->
 
 ```js
 import MyComponent from './MyComponent.html';
@@ -771,7 +787,8 @@ var component = new MyComponent({
 component.say('👋');
 ```
 
-Methods (whether built-in or custom) can also be called inside [event handlers](guide#event-handlers):
+Методы (как встроенные, так и пользовательские) можно вызывать внутри [обработчиков событий](guide#event-handlers):
+<!-- Methods (whether built-in or custom) can also be called inside [event handlers](guide#event-handlers): -->
 
 ```html
 <!-- { repl: false } -->
@@ -779,13 +796,16 @@ Methods (whether built-in or custom) can also be called inside [event handlers](
 ```
 
 
-### Custom event handlers
+### Пользовательские обработчики событий (Custom event handlers)
 
-Soon, we'll learn about [event handlers](guide#event-handlers) – if you want, skip ahead to that section first then come back here!
+Вскоре мы узнаем о [обработчиках событий](guide#event-handlers) - если хотите, сперва прочитайте этот раздел, а затем вернитесь сюда!
+<!-- Soon, we'll learn about [event handlers](guide#event-handlers) – if you want, skip ahead to that section first then come back here! -->
 
-Most of the time you can make do with the standard DOM events (the sort you'd add via `element.addEventListener`, such as `click`) but sometimes you might need custom events to handle gestures, for example.
+Большую часть времени вы можете работать со стандартными событиями DOM (сортировка, которую вы добавили бы с помощью элемента `element.addEventListener`, например `click`), но иногда вам могут потребоваться специальные события, например, для обработки жестов.
+<!-- Most of the time you can make do with the standard DOM events (the sort you'd add via `element.addEventListener`, such as `click`) but sometimes you might need custom events to handle gestures, for example. -->
 
-Custom events are just functions that take a node and a callback as their argument, and return an object with a `destroy` method that gets called when the element is removed from the page:
+Пользовательские события - это просто функции, которые берут узел и callback в качестве своего аргумента, и возвращают объект с помощью метода `destroy`, который вызывается, когда элемент удаляется со страницы:
+<!-- Custom events are just functions that take a node and a callback as their argument, and return an object with a `destroy` method that gets called when the element is removed from the page: -->
 
 ```html
 <!-- { title: 'Custom events' } -->
@@ -824,9 +844,10 @@ Custom events are just functions that take a node and a callback as their argume
 ```
 
 
-### Namespaces
+### Пространство имен (Namespaces)
 
-Components are assumed to be in the HTML namespace. If your component is designed to be used inside an `<svg>` element, you need to specify the namespace:
+Предполагается, что компоненты находятся в пространстве имен HTML. Если ваш компонент предназначен для использования внутри элемента `<svg>`, вам нужно указать пространство имен:
+<!-- Components are assumed to be in the HTML namespace. If your component is designed to be used inside an `<svg>` element, you need to specify the namespace: -->
 
 ```html
 <!--{ title: 'SVG' }-->

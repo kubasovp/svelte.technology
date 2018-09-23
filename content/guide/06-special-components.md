@@ -117,7 +117,7 @@ title: Специальные элементы (Special elements)
 
 ### `<svelte:window>`
 
-Тег `<svelte:window>` дает вам удобный способ декларативно добавлять обработчики событий в `window`. Обработчики автоматически удаляются при уничтожении компонента.
+Тег `<svelte:window>` дает вам удобный способ декларативно добавлять прослушиватели событий в `window`. Прослушиватели автоматически удаляются при уничтожении компонента.
 <!-- The `<svelte:window>` tag gives you a convenient way to declaratively add event listeners to `window`. Event listeners are automatically removed when the component is destroyed. -->
 
 ```html
