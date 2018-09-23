@@ -1,13 +1,15 @@
 ---
-title: Special elements
+title: Специальные элементы (Special elements)
 ---
 
-Svelte includes a handful of built-in elements with special behaviour.
+В Svelte есть несколько встроенных элементов со специальным поведением.
+<!-- Svelte includes a handful of built-in elements with special behaviour. -->
 
 
 ### `<svelte:self>`
 
-Sometimes, a component needs to embed itself recursively — for example if you have a tree-like data structure. In Svelte, that's accomplished with the `<svelte:self>` tag:
+Иногда нужно встроить компонент рекурсивно - например, если у вас есть древовидная структура данных. В Svelte это выполняется с помощью тега `<svelte:self>`:
+<!-- Sometimes, a component needs to embed itself recursively — for example if you have a tree-like data structure. In Svelte, that's accomplished with the `<svelte:self>` tag: -->
 
 ```html
 <!-- { title: '<svelte:self> tags' } -->
@@ -29,7 +31,8 @@ Sometimes, a component needs to embed itself recursively — for example if you 
 
 ### `<svelte:component>`
 
-If you don't know what kind of component to render until the app runs — in other words, it's driven by state — you can use `<svelte:component>`:
+Если вы не знаете, какой компонент должен отображать до запуска приложения, другими словами, он управляется по состоянию - вы можете использовать `<svelte:component>`:
+<!-- If you don't know what kind of component to render until the app runs — in other words, it's driven by state — you can use `<svelte:component>`: -->
 
 ```html
 <!-- { title: '<svelte:component> tags' } -->
@@ -58,9 +61,11 @@ If you don't know what kind of component to render until the app runs — in ot
 <p style="color: blue">Blue {name}</p>
 ```
 
-> Note that `Red` and `Blue` are items in `data`, *not* `components`, unlike if we were doing `<Red>` or `<Blue>`.
+> Обратите внимание, что `Red` и `Blue` являются элементами `data`, а *не* `components`, в отличие от `<Red>` или `<Blue>`.
+<!-- Note that `Red` and `Blue` are items in `data`, *not* `components`, unlike if we were doing `<Red>` or `<Blue>`. -->
 
-The expression inside the `this="{...}"` can be any valid JavaScript expression. For example, it could be a [computed property](guide#computed-properties):
+Выражение внутри `this="{...}"` может быть любым допустимым выражением JavaScript. Например, это может быть [вычисляемое свойство](guide#computed-properties): 
+<!-- The expression inside the `this="{...}"` can be any valid JavaScript expression. For example, it could be a [computed property](guide#computed-properties): -->
 
 ```html
 <!-- { title: '<svelte:component> with computed' } -->
@@ -112,7 +117,8 @@ The expression inside the `this="{...}"` can be any valid JavaScript expression.
 
 ### `<svelte:window>`
 
-The `<svelte:window>` tag gives you a convenient way to declaratively add event listeners to `window`. Event listeners are automatically removed when the component is destroyed.
+Тег `<svelte:window>` дает вам удобный способ декларативно добавлять обработчики событий в `window`. Обработчики автоматически удаляются при уничтожении компонента.
+<!-- The `<svelte:window>` tag gives you a convenient way to declaratively add event listeners to `window`. Event listeners are automatically removed when the component is destroyed. -->
 
 ```html
 <!-- { title: '<svelte:window> tags' } -->
@@ -138,7 +144,8 @@ The `<svelte:window>` tag gives you a convenient way to declaratively add event 
 </style>
 ```
 
-You can also bind to certain values — so far `innerWidth`, `outerWidth`, `innerHeight`, `outerHeight`, `scrollX`, `scrollY` and `online`:
+Вы можете привязать к определенным значениям - по-прежнему `innerWidth`, `outerWidth`, `innerHeight`, `outerHeight`, `scrollX`, `scrollY` и `online`:
+<!-- You can also bind to certain values — so far `innerWidth`, `outerWidth`, `innerHeight`, `outerHeight`, `scrollX`, `scrollY` and `online`: -->
 
 ```html
 <!-- { title: '<svelte:window> bindings' } -->
@@ -169,9 +176,11 @@ You can also bind to certain values — so far `innerWidth`, `outerWidth`, `inne
 
 ### `<svelte:head>`
 
-If you're building an application with Svelte — particularly if you're using [Sapper](https://sapper.svelte.technology) — then it's likely you'll need to add some content to the `<head>` of your page, such as adding a `<title>` element.
+Если вы создаете приложение с Svelte — особенно если вы используете [Sapper](https://sapper.svelte.technology) - скорее всего, вам нужно будет добавить некоторый контент в `<head>` вашей страницы, например, добавить элемент `<title>`.
+<!-- If you're building an application with Svelte — particularly if you're using [Sapper](https://sapper.svelte.technology) — then it's likely you'll need to add some content to the `<head>` of your page, such as adding a `<title>` element. -->
 
-You can do that with the `<svelte:head>` tag:
+Вы можете сделать это с помощью тега `<svelte:head>`:
+<!-- You can do that with the `<svelte:head>` tag: -->
 
 ```html
 <!-- { title: '<svelte:head> tags' } -->
@@ -180,4 +189,5 @@ You can do that with the `<svelte:head>` tag:
 </svelte:head>
 ```
 
-When [server rendering](guide#server-side-rendering), the `<head>` contents can be extracted separately to the rest of the markup.
+При [серверном рендеринге](guide#server-side-rendering) содержимое `<head>` может быть выделено отдельно от остальной части разметки.
+<!-- When [server rendering](guide#server-side-rendering), the `<head>` contents can be extracted separately to the rest of the markup. -->

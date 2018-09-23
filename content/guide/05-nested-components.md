@@ -1,8 +1,9 @@
 ---
-title: Nested components
+title: Вложенные компоненты (Nested components)
 ---
 
-As well as containing elements (and `if` blocks and `each` blocks), Svelte components can contain *other* Svelte components.
+Помимо вложенных элементов (и блоков `if` и `each`) компоненты Svelte могут содержать *другие* компоненты Svelte.
+<!-- As well as containing elements (and `if` blocks and `each` blocks), Svelte components can contain *other* Svelte components. -->
 
 ```html
 <!-- { title: 'Nested components' } -->
@@ -36,14 +37,17 @@ const widget = new Widget({
 });
 ```
 
-...except that Svelte takes care of destroying the child component when the parent is destroyed, and keeps the two components in sync with *props*.
+...за исключением того, что Svelte позаботится об уничтожении дочернего компонента при уничтожении родителя и поддерживает синхронизацию двух компонентов со *свойствами*.
+<!-- ...except that Svelte takes care of destroying the child component when the parent is destroyed, and keeps the two components in sync with *props*. -->
 
-> Component names must be capitalised, following the widely-used JavaScript convention of capitalising constructor names. It's also an easy way to distinguish components from elements in your template.
+> Имена компонентов должны быть набраны ЗАГЛАВНЫМИ буквами в соответствии с широко используемым условным обозначением конструктора JavaScript. Это также простой способ отличить компоненты от элементов в вашем шаблоне.
+<!-- Component names must be capitalised, following the widely-used JavaScript convention of capitalising constructor names. It's also an easy way to distinguish components from elements in your template. -->
 
 
 ### Props
 
-Props, short for 'properties', are the means by which you pass data down from a parent to a child component — in other words, they're just like attributes on an element:
+Props - сокращение для 'properties' - средство, с помощью которого вы передаете данные от родителя к дочернему компоненту - иными словами, они похожи на атрибуты элемента:
+<!-- Props, short for 'properties', are the means by which you pass data down from a parent to a child component — in other words, they're just like attributes on an element: -->
 
 ```html
 <!--{ title: 'Props' }-->
@@ -76,9 +80,11 @@ Props, short for 'properties', are the means by which you pass data down from a 
 }
 ```
 
-As with element attributes, prop values can contain any valid JavaScript expression.
+Как и атрибуты элементов, значения prop могут содержать любое допустимое выражение JavaScript.
+<!-- As with element attributes, prop values can contain any valid JavaScript expression. -->
 
-Often, the name of the property will be the same as the value, in which case we can use a shorthand:
+Часто имя свойства бывает таким же, как и значение - в этом случае мы можем использовать сокращенное название:
+<!-- Often, the name of the property will be the same as the value, in which case we can use a shorthand: -->
 
 ```html
 <!-- { repl: false } -->
@@ -87,12 +93,14 @@ Often, the name of the property will be the same as the value, in which case we 
 <Widget {foo}/>
 ```
 
-> Note that props are *one-way* — to get data from a child component into a parent component, use [bindings](guide#bindings).
+> Обратите внимание, что props *односторонние* - для получения данных из дочернего компонента в родительский компонент, используйте [bindings](guide#bindings).
+<!-- Note that props are *one-way* — to get data from a child component into a parent component, use [bindings](guide#bindings). -->
 
 
-### Composing with `<slot>`
+### Испоьлзование `<slot>` (Composing with `<slot>`)
 
-A component can contain a `<slot></slot>` element, which allows the parent component to inject content:
+Компонент может содержать элемент `<slot></slot>`, который позволяет родительскому компоненту внедрять контент:
+<!-- A component can contain a `<slot></slot>` element, which allows the parent component to inject content: -->
 
 ```html
 <!-- { title: 'Using <slot>' } -->
@@ -124,7 +132,8 @@ A component can contain a `<slot></slot>` element, which allows the parent compo
 </style>
 ```
 
-The `<slot>` element can contain 'fallback content', which will be used if no children are provided for the component:
+Элемент `<slot>` может содержать 'резервный контент', который будет использоваться, если в компоненте нет дочерних элементов:
+<!-- The `<slot>` element can contain 'fallback content', which will be used if no children are provided for the component: -->
 
 ```html
 <!-- { title: 'Default slot content' } -->
@@ -159,6 +168,7 @@ The `<slot>` element can contain 'fallback content', which will be used if no ch
 </style>
 ```
 
+Вы также можете создавать именованные - *named* - слоты. Все элементы с соответствующим именем `slot` будут заполнять эти слоты:
 You can also have *named* slots. Any elements with a corresponding `slot` attribute will fill these slots:
 
 ```html
@@ -195,9 +205,10 @@ You can also have *named* slots. Any elements with a corresponding `slot` attrib
 ```
 
 
-### Shorthand imports
+### Сокращенный импорт (Shorthand imports)
 
-As an alternative to using an `import` declaration...
+В качестве альтернативы декларации `import`...
+<!-- As an alternative to using an `import` declaration... -->
 
 ```html
 <!-- { repl: false } -->
@@ -210,7 +221,8 @@ As an alternative to using an `import` declaration...
 </script>
 ```
 
-...you can write this:
+...вы можете написать это:
+<!-- ...you can write this: -->
 
 ```html
 <!-- { repl: false } -->
