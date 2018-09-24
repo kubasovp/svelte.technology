@@ -1,15 +1,18 @@
 ---
-title: Template syntax
+title: Синтаксис шаблонов (Template syntax)
 ---
 
-Rather than reinventing the wheel, Svelte templates are built on foundations that have stood the test of time: HTML, CSS and JavaScript. There's very little extra stuff to learn.
+Вместо того, чтобы изобретать колесо, шаблоны Svelte построены на фундаменте, который выдержал проверку временем: HTML, CSS и JavaScript. Есть совсем немного дополнительных информации для освоения.
+<!-- Rather than reinventing the wheel, Svelte templates are built on foundations that have stood the test of time: HTML, CSS and JavaScript. There's very little extra stuff to learn. -->
 
-> Svelte version 1 had a slightly different template syntax. You can upgrade older components automatically using [svelte-upgrade](https://github.com/sveltejs/svelte-upgrade).
+> В первой версии Svelte был несколько иной синтаксис шаблонов. Вы можете обновить старые компоненты автоматически, используя [svelte-upgrade](https://github.com/sveltejs/svelte-upgrade).
+<!-- Svelte version 1 had a slightly different template syntax. You can upgrade older components automatically using [svelte-upgrade](https://github.com/sveltejs/svelte-upgrade). -->
 
 
-### Tags
+### Теги (Tags)
 
-Tags allow you to bind data to your template. Whenever your data changes (for example after `component.set(...)`), the DOM updates automatically. You can use any JavaScript expression in templates, and it will also automatically update:
+Теги позволяют привязывать данные к вашему шаблону. Всякий раз, когда ваши данные изменяются (например, после `component.set(...)`), DOM автоматически обновляется. Вы можете использовать любое выражение JavaScript в шаблонах и все будет автоматически обновляться:
+<!-- Tags allow you to bind data to your template. Whenever your data changes (for example after `component.set(...)`), the DOM updates automatically. You can use any JavaScript expression in templates, and it will also automatically update: -->
 
 ```html
 <!-- { title: 'Template tags' } -->
@@ -24,7 +27,8 @@ Tags allow you to bind data to your template. Whenever your data changes (for ex
 }
 ```
 
-You can also use tags in attributes:
+Вы можете использовать теги в атрибутах:
+<!-- You can also use tags in attributes: -->
 
 ```html
 <!-- { title: 'Tags in attributes' } -->
@@ -39,12 +43,14 @@ You can also use tags in attributes:
 	hideParagraph: false
 }
 ```
-[Boolean attributes](https://www.w3.org/TR/html5/infrastructure.html#sec-boolean-attributes) like `hidden` will be omitted if the tag expression evaluates to false.
+[Булевые атрибуты](https://www.w3.org/TR/html5/infrastructure.html#sec-boolean-attributes), например `hidden`, будут убраны, если выражение тега будет равно false.
+<!-- [Boolean attributes](https://www.w3.org/TR/html5/infrastructure.html#sec-boolean-attributes) like `hidden` will be omitted if the tag expression evaluates to false. -->
 
 
-### HTML
+### Язык разметки гипертекста (HTML)
 
-Ordinary tags render expressions as plain text. If you need your expression interpreted as HTML, wrap it in a special `@html` tag:
+Обычно теги рендерятся как текст. Если вам нужно, чтобы ваше выражение интерпретировалось как HTML, оберните его в специальный тег `@html`:
+<!-- Ordinary tags render expressions as plain text. If you need your expression interpreted as HTML, wrap it in a special `@html` tag: -->
 
 ```html
 <!-- { title: 'Triple tags' } -->
@@ -59,14 +65,17 @@ Ordinary tags render expressions as plain text. If you need your expression inte
 }
 ```
 
-As with regular tags, you can use any JavaScript expression in HTML tags, and it will automatically update the document when your data changes.
+Как и в обычных тегах, вы можете использовать любое выражение JavaScript в тегах HTML и документ будет автоматически обновляться при изменении данных.
+<!-- As with regular tags, you can use any JavaScript expression in HTML tags, and it will automatically update the document when your data changes. -->
 
-> HTML is **not** sanitized before it is rendered! If you are displaying user input, you are responsible for first sanitizing it. Not doing so potentially opens you up to XSS attacks.
+> HTML **не очищается** перед его рендерингом! Не показывайте введенную пользователем информацию без предварительной обработки, иначе открывается возможность для XSS атак.
+<!-- HTML is **not** sanitized before it is rendered! If you are displaying user input, you are responsible for first sanitizing it. Not doing so potentially opens you up to XSS attacks. -->
 
 
-### If blocks
+### Условия (If blocks)
 
-Control whether or not part of your template is rendered by wrapping it in an if block.
+Управляйте отображением частей вашего шаблона с помощью блоков `if`.
+<!-- Control whether or not part of your template is rendered by wrapping it in an if block. -->
 
 ```html
 <!-- { repl: false } -->
@@ -79,7 +88,8 @@ Control whether or not part of your template is rendered by wrapping it in an if
 {/if}
 ```
 
-You can combine the two blocks above with `{:else}`:
+Вы можете комбинировать два блока выше с помощью `{:else}`:
+<!-- You can combine the two blocks above with `{:else}`: -->
 
 ```html
 <!-- { repl: false } -->
@@ -90,7 +100,8 @@ You can combine the two blocks above with `{:else}`:
 {/if}
 ```
 
-You can also use `{:elseif ...}`:
+Также, можно использовать `{:elseif ...}`:
+<!-- You can also use `{:elseif ...}`: -->
 
 ```html
 <!--{ title: 'If, else and elseif' }-->
@@ -110,9 +121,10 @@ You can also use `{:elseif ...}`:
 }
 ```
 
-### Each blocks
+### Блоки Each (Each blocks)
 
-Iterate over lists of data:
+Вывод элементов списка:
+<!-- Iterate over lists of data: -->
 
 ```html
 <!--{ title: 'Each blocks' }-->
@@ -145,7 +157,8 @@ Iterate over lists of data:
 }
 ```
 
-You can access the index of the current element with *expression* as *name*, *index*:
+Вы можете обратиться к индексу текущего элемента *выразив* его как *name*, *index*:
+<!-- You can access the index of the current element with *expression* as *name*, *index*: -->
 
 ```html
 <!--{ title: 'Each block indexes' }-->
@@ -175,9 +188,11 @@ You can access the index of the current element with *expression* as *name*, *in
 }
 ```
 
-> By default, if the list `a, b, c` becomes `a, c`, Svelte will *remove* the third block and *change* the second from `b` to `c`, rather than removing `b`. If that's not what you want, use a [keyed each block](guide#keyed-each-blocks).
+> По умолчанию, если список `a, b, c` становится `a, c`, Svelte будет *удалять* третий блок и *изменять* во  втором `b` на `c`, а не на удалять `b`. Если вы не хотите этого, используйте [keyed each block](guide#keyed-each-blocks).
+<!-- By default, if the list `a, b, c` becomes `a, c`, Svelte will *remove* the third block and *change* the second from `b` to `c`, rather than removing `b`. If that's not what you want, use a [keyed each block](guide#keyed-each-blocks). -->
 
-You can use destructuring patterns on the elements of the array:
+Вы можете использовать шаблоны деструктуризации для элементов массива:
+<!-- You can use destructuring patterns on the elements of the array: -->
 
 ```html
 <!--{ title: 'Each block destructuring' }-->
@@ -210,7 +225,8 @@ You can use destructuring patterns on the elements of the array:
 }
 ```
 
-If you want to iterate over an object you can use `Object.entries(object)` which returns the object's properties as `[key, value]` pairs:
+Если вы хотите итерации по объекту, вы можете использовать `Object.entries(object)`, который возвращает свойства объекта как пары `[key, value]`:
+<!-- If you want to iterate over an object you can use `Object.entries(object)` which returns the object's properties as `[key, value]` pairs: -->
 
 ```html
 <!--{ title: 'Iterating over objects' }-->
@@ -231,9 +247,10 @@ If you want to iterate over an object you can use `Object.entries(object)` which
 }
 ```
 
-### Await blocks
+### Блоки Await (Await blocks)
 
-You can represent the three states of a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) — pending, fulfilled and rejected — with an `await` block:
+Вы можете представить три состояния [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) - ожидающие, исполненные и отклоненные - с блоком `await`:
+<!-- You can represent the three states of a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) — pending, fulfilled and rejected — with an `await` block: -->
 
 ```html
 <!--{ title: 'Await blocks' }-->
@@ -258,12 +275,14 @@ You can represent the three states of a [Promise](https://developer.mozilla.org/
 </script>
 ```
 
-If the expression in `{#await expression}` *isn't* a promise, Svelte skips ahead to the `then` section.
+Если выражение в `{#await}` *не* `promise`, Svelte переходит в раздел `then`.
+<!-- If the expression in `{#await expression}` *isn't* a promise, Svelte skips ahead to the `then` section. -->
 
 
-### Directives
+### Директивы (Directives)
 
-The last place where Svelte template syntax differs from regular HTML: *directives* allow you to add special instructions for adding [event handlers](guide#event-handlers), [bindings](guide#binding-data), [referencing elements](guide#refs) and so on. We'll cover each of those in later stages of this guide – for now, all you need to know is that directives can be identified by the `:` character:
+Последнее место, где синтаксис шаблона Svelte отличается от обычного HTML: *директивы* позволяют добавлять специальные инструкции для добавления [обработчиков событий](guide#event-handlers), [привязок](guide#binding-data), [referencing elements](guide#refs) и так далее. Мы рассмотрим каждый из них на более поздних этапах этого руководства - на данный момент все, что вам нужно знать, это то, что директивы могут быть определены символом `:`:
+<!-- The last place where Svelte template syntax differs from regular HTML: *directives* allow you to add special instructions for adding [event handlers](guide#event-handlers), [bindings](guide#binding-data), [referencing elements](guide#refs) and so on. We'll cover each of those in later stages of this guide – for now, all you need to know is that directives can be identified by the `:` character: -->
 
 ```html
 <!--{ title: 'Element directives' }-->
@@ -278,4 +297,5 @@ The last place where Svelte template syntax differs from regular HTML: *directiv
 }
 ```
 
-> Technically, the `:` character is used to denote namespaced attributes in HTML. These will *not* be treated as directives, if encountered.
+> Технически символ `:` используется для обозначения атрибутов с именами в HTML. Они  *не* будут рассматриваться как директивы, если повстречаются.
+<!-- Technically, the `:` character is used to denote namespaced attributes in HTML. These will *not* be treated as directives, if encountered. -->
